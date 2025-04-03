@@ -25,13 +25,28 @@ class ContactController extends Controller
 
     public function store(Request $request)
     {
-        Contact::create($request->validate([
-            'name' => 'required',
-            'contact' => 'required',
-            'email' => 'required|email|unique:contacts,email'
-        ]));
-
+        $request->validate([
+            'name' => 'required|string|min:6',
+            'contact' => 'required|digits:9|unique:contacts,contact', 
+            'email' => 'required|email|unique:contacts,email' 
+        ]);
+    
+        Contact::create($request->all());
+    
         return redirect()->route('contacts.index')->with('success', 'Contact added successfully!');
+    }
+    
+    public function update(Request $request, Contact $contact)
+    {
+        $request->validate([
+            'name' => 'required|string|min:6',
+            'contact' => 'required|digits:9|unique:contacts,contact',
+            'email' => 'required|email|unique:contacts,email,' . $contact->id
+        ]);
+    
+        $contact->update($request->all());
+    
+        return redirect()->route('contacts.index')->with('success', 'Contact updated successfully!');
     }
 
     public function edit(Contact $contact)
@@ -39,18 +54,6 @@ class ContactController extends Controller
         return view('contacts.edit', compact('contact'));
     }
 
-    public function update(Request $request, Contact $contact)
-    {
-        $request->validate([
-            'name' => 'required',
-            'contact' => 'required',
-            'email' => 'required|email|unique:contacts,email,' . $contact->id,
-        ]);
-
-        $contact->update($request->all());
-
-        return redirect()->route('contacts.index')->with('success', 'Contact updated successfully!');
-    }
 
     public function destroy(Contact $contact)
     {
