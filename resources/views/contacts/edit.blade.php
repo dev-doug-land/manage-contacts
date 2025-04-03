@@ -15,23 +15,31 @@
                         @method('PUT')
                         <div>
                             <label class="block text-gray-700">Name:</label>
-                            <input type="text" name="name" value="{{ $contact->name }}" class="w-full border rounded px-3 py-2" required>
+                            <input type="text" name="name" value="{{ $contact->name }}"
+                                class="w-full border rounded px-3 py-2" required>
                         </div>
                         <div>
                             <label class="block text-gray-700">Contact:</label>
-                            <input type="text" name="contact" value="{{ $contact->contact }}" class="w-full border rounded px-3 py-2" required>
+                            <input type="text" name="contact" value="{{ $contact->contact }}"
+                                class="w-full border rounded px-3 py-2" required>
                         </div>
                         <div>
                             <label class="block text-gray-700">Email:</label>
-                            <input type="email" name="email" value="{{ $contact->email }}" class="w-full border rounded px-3 py-2" required>
+                            <input type="email" name="email" value="{{ $contact->email }}"
+                                class="w-full border rounded px-3 py-2" required>
                         </div>
                         <div>
-                            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Update Contact</button>
-                            <a href="{{ route('contacts.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded">Cancel</a>
+                            <button type="submit" class="bg-blue-500 text-white px-4 mr-2 py-2 rounded">Update
+                                Contact</button>
+                            <button type="button" onclick="location.href='{{ route('contacts.index') }}'"
+                                class="bg-gray-500 text-white px-4 py-2 rounded">Cancel</a>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <x-alert-error />
+
 </x-app-layout>

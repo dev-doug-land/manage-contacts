@@ -1,6 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <i class="fas fa-address-book"></i>
             {{ __('Contacts') }}
         </h2>
     </x-slot>
@@ -11,8 +12,9 @@
                 <div class="p-6 text-gray-900">
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-xl font-semibold mb-4">Contact List</h2>
-                        <a href="{{ route('contacts.create') }}"
+                        <a href="{{ url('/contacts/create') }}"
                             class="bg-green-500 text-white px-4 py-2 rounded mb-4 inline-block">Add New Contact</a>
+
                     </div>
 
                     <table class="min-w-full bg-white border border-gray-300">
@@ -34,10 +36,9 @@
                                     <td class="border px-4 py-2">{{ $contact->contact }}</td>
                                     <td class="border px-4 py-2">{{ $contact->email }}</td>
                                     <td class="border px-4 py-2">
-                                        <a href="{{ route('contacts.edit', $contact->id) }}"
-                                            class="bg-blue-500 text-white px-3 py-1 rounded">Edit</a>
-                                        <button onclick="event.stopPropagation(); showDeleteModal({{ $contact->id }})"
-                                            class="bg-red-500 text-white px-3 py-1 rounded">Delete</button>
+                                        <button onclick="event.stopPropagation()" type="button" href="{{ route('contacts.edit', $contact->id) }}"
+                                            class="bg-blue-500 text-white px-3 py-1 mr-2 rounded">Edit</button>
+                                        <x-delete-modal route="{{ route('contacts.destroy', $contact->id) }}" />
                                     </td>
                                 </tr>
                             @endforeach
@@ -47,30 +48,7 @@
             </div>
         </div>
     </div>
-    <!-- Delete Confirmation Modal -->
-    <div id="deleteModal" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
-        <div class="bg-white p-6 rounded shadow-lg w-96">
-            <h2 class="text-lg font-semibold mb-4">Confirm Delete</h2>
-            <p>Are you sure you want to delete this contact?</p>
-            <div class="mt-4 flex justify-end">
-                <button onclick="hideDeleteModal()"
-                    class="bg-gray-500 text-white px-4 py-2 rounded mr-2">Cancel</button>
-                <form id="deleteForm" method="POST" class="inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Delete</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    <script>
-        function showDeleteModal(contactId) {
-            document.getElementById('deleteForm').action = `/contacts/${contactId}`;
-            document.getElementById('deleteModal').classList.remove('hidden');
-        }
+    
+    <x-alert-error />
 
-        function hideDeleteModal() {
-            document.getElementById('deleteModal').classList.add('hidden');
-        }
-    </script>
 </x-app-layout>

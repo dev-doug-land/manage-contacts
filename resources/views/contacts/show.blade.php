@@ -24,14 +24,17 @@
                         <strong>Email:</strong> {{ $contact->email }}
                     </div>
                     
-                    <div class="mt-4">
-                        <a href="{{ route('contacts.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded">Back to List</a>
-                        <a href="{{ route('contacts.edit', $contact->id) }}" class="bg-blue-500 text-white px-4 py-2 rounded">Edit Contact</a>
+                    <div class="mt-4 text-end">
+                        <button type="button" onclick="location.href='{{ route('contacts.index') }}'" class="bg-gray-500 text-white px-4 mr-2 py-2 rounded">Back to List</button>
+                        <button type="button" onclick="location.href='{{ route('contacts.edit', $contact->id) }}'" class="bg-blue-500 text-white px-4 mr-2 py-2 rounded">Edit Contact</button>
+                        <x-delete-modal type="button" route="{{ route('contacts.destroy', $contact->id) }}" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
+    <x-alert-error />
+  
 </x-app-layout>
 

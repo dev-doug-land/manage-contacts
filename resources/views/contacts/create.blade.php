@@ -25,12 +25,17 @@
                             <input type="email" name="email" class="w-full border rounded px-3 py-2" required>
                         </div>
                         <div>
-                            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Save Contact</button>
-                            <a href="{{ route('contacts.index') }}" class="bg-gray-500 text-white px-4 py-2 rounded">Cancel</a>
+                            <button type="submit" class="bg-green-500 text-white px-4 py-2 mr-2 rounded">Save
+                                Contact</button>
+                            <button onclick="location.href='{{ route('contacts.index') }}'"
+                                class="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <x-alert-error />
+
 </x-app-layout>

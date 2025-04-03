@@ -33,4 +33,12 @@
             </main>
         </div>
     </body>
+    <script src="https://kit.fontawesome.com/ccb3c6b6ab.js" crossorigin="anonymous"></script>
+
+    <style>
+        button {
+            height: 40px !important;
+        }
+    </style>
+
 </html>
